@@ -22,7 +22,7 @@ def verification():
 @app.route("/", methods=["POST"])
 def handle_msg():
     print("Handle POST")
-    print(flask.request)
+    print(flask.request.get_json())
 
 
 if __name__ == "__main__":
