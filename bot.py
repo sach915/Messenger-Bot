@@ -48,7 +48,7 @@ def handle_msg():
             recipient_id = message_data["sender"]["id"]
 
             msg_to_send = {
-                "messaging_type": "Text"
+                "messaging_type": "Text",
                 "recipient":{
                   "id": recipient_id
                 },
