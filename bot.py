@@ -27,12 +27,15 @@ def handle_msg():
 
     if request["object"] == "page":
         for datum in request["entry"]:
-            message_data = datum["messaging"][0]
             # Message data will always have only one message according to the docs
+            message_data = datum["messaging"][0]
+
             message = message_data["message"]["text"]
             print("MESSAGE IS ", message)
             print("RECIPIENT ", message_data["recipient"]["id"])
             print("SENDER ", message_data["sender"]["id"])
+            print("TOKEN ",os.environ["PAGE_ACCESS_TOKEN"])
+
 
 
     return "Done!"
