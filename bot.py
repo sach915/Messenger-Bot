@@ -28,7 +28,8 @@ def handle_msg():
     if request["object"] == "page":
         for datum in request["entry"]:
             message_data = datum["messaging"]
-            message = message_data["message"]["text"]
+            # Message data will always have only one message according to the docs
+            message = message_data["message"][0]["text"]
             print("MESSAGE IS ", message)
             print("RECIPIENT ", message_data["recipient"]["id"])
             print("SENDER ", message_data["sender"]["id"])
