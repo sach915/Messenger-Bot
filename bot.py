@@ -23,6 +23,17 @@ def verification():
 def handle_msg():
     print("Handle POST")
     print(flask.request.get_json())
+    request = flask.request.get_json()
+
+    if request["object"] == "page":
+        for datum in request["entry"]:
+            message_data = datum["messaging"]
+            message = message_data["message"]["text"]
+            print("MESSAGE IS ", message)
+            print("RECIPIENT ", message_data["recipient"]["id"])
+            print("SENDER ", message_data["sender"]["id"])
+
+
     return "Done!"
 
 
