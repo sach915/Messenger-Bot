@@ -5,7 +5,7 @@ import os
 app = flask.Flask(__name__)
 
 @app.route("/", methods=["GET"])
-def index():
+def verification():
     print("Im in here")
     print(flask.request.args)
 
@@ -18,6 +18,11 @@ def index():
 
 
     return "Hello World"
+
+@app.route("/", methods=["POST"])
+def handle_msg():
+    print(flask.request)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
