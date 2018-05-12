@@ -1,6 +1,7 @@
 import flask
 import requests
 import os
+import json
 
 app = flask.Flask(__name__)
 
@@ -31,11 +32,34 @@ def handle_msg():
             message_data = datum["messaging"][0]
 
             message = message_data["message"]["text"]
-            print("MESSAGE IS ", message)
-            print("RECIPIENT ", message_data["recipient"]["id"])
-            print("SENDER ", message_data["sender"]["id"])
-            print("TOKEN ",os.environ["PAGE_ACCESS_TOKEN"])
 
+            # print("MESSAGE IS ", message)
+            # print("RECIPIENT ", message_data["recipient"]["id"])
+            # print("SENDER ", message_data["sender"]["id"])
+            # print("TOKEN ",os.environ["PAGE_ACCESS_TOKEN"])
+
+
+            # Sending a message back !
+            # After looking online I could've also used the param in reqest.post but oh well
+            token = os.environ["PAGE_ACCESS_TOKEN"]
+            url = "https://graph.facebook.com/v2.6/me/messages?access_token=" + token
+
+            # Recipient would be the sender
+            recipient = message_data["sender"]["id"]
+
+            msg_to_send = {
+                "messaging_type": "Text"
+                "recipient":{
+                  "id":
+                },
+                "message":{
+                  "text":"hello, world!"
+                }
+            }
+
+            msg = json.dumps(msg_to_send)
+
+            requests.post(url, data=msg)
 
 
     return "Done!"
