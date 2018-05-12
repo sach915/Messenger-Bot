@@ -23,6 +23,7 @@ def verification():
 def handle_msg():
     print("Handle POST")
     print(flask.request.get_json())
+    return "Done!"
 
 
 if __name__ == "__main__":
