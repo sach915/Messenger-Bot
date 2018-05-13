@@ -45,7 +45,7 @@ def handle_msg():
             url = "https://graph.facebook.com/v2.6/me/messages?access_token=" + token
 
             # Recipient would be the sender
-            recipient_id = '\'' + message_data["sender"]["id"] + "\'"
+            recipient_id = message_data["sender"]["id"]
 
             print(recipient_id)
 
@@ -61,7 +61,9 @@ def handle_msg():
 
             msg = json.dumps(msg_to_send)
             print(msg)
-            requests.post(url, data=msg)
+            r = requests.post(url, data=msg)
+            print(r.status_code)
+            print(r.text)
             print("POSTED THE MESSAGE?")
 
     return "Done!"
