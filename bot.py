@@ -49,6 +49,10 @@ def handle_msg():
 
             print(recipient_id)
 
+            headers = {
+            "Content-Type: application/json"
+            }
+
             msg_to_send = {
                 "messaging_type": "Text",
                 "recipient":{
@@ -61,6 +65,7 @@ def handle_msg():
 
             msg = json.dumps(msg_to_send)
             print(msg)
+            print(url)
             r = requests.post(url, data=msg)
             print(r.status_code)
             print(r.text)
