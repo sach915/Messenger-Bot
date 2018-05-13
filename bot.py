@@ -60,7 +60,7 @@ def handle_msg():
             msg = json.dumps(msg_to_send)
 
             requests.post(url, data=msg)
-
+            print("POSTED THE MESSAGE?")
 
     return "Done!"
 
