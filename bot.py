@@ -45,7 +45,8 @@ def handle_msg():
             url = "https://graph.facebook.com/v2.6/me/messages?access_token=" + token
 
             # Recipient would be the sender
-            recipient_id = message_data["sender"]["id"]
+            recipient_id = '\'' + message_data["sender"]["id"] + "\'"
+
             print(recipient_id)
 
             msg_to_send = {
