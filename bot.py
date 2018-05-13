@@ -47,7 +47,7 @@ def handle_msg():
             # Recipient would be the sender
             recipient_id = message_data["sender"]["id"]
 
-            print(recipient_id)
+            #print(recipient_id)
 
 
             headers = {
@@ -66,12 +66,12 @@ def handle_msg():
             }
 
             msg = json.dumps(msg_to_send)
-            print(msg)
-            print(url)
-            print("about to post")
-            print("WHAT IS HAPPENING?")
+            #print(msg)
+            #print(url)
+            #print("about to post")
+            #print("WHAT IS HAPPENING?")
             r = requests.post(url, headers=headers, data=msg)
-            print("POSTED THE MESSAGE?")
+            #print("POSTED THE MESSAGE?")
 
             print(r.status_code)
             print(r.text)
