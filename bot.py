@@ -66,7 +66,7 @@ def handle_msg():
             msg = json.dumps(msg_to_send)
             print(msg)
             print(url)
-            r = requests.post(url, data=msg)
+            r = requests.post(url, headers=headers, data=msg)
             print(r.status_code)
             print(r.text)
             print("POSTED THE MESSAGE?")
