@@ -49,11 +49,11 @@ def handle_msg():
 
             print(recipient_id)
 
-            """
+
             headers = {
             "Content-Type": "application/json"
             }
-            """
+
 
             msg_to_send = {
                 "messaging_type": "Text",
@@ -70,7 +70,7 @@ def handle_msg():
             print(url)
             print("about to post")
             print("WHAT IS HAPPENING?")
-            r = requests.post(url, data=msg)
+            r = requests.post(url, headers=headers, data=msg)
             print("POSTED THE MESSAGE?")
 
             print(r.status_code)
