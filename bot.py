@@ -50,7 +50,7 @@ def handle_msg():
             print(recipient_id)
 
             headers = {
-            "Content-Type: application/json"
+            "Content-Type": "application/json"
             }
 
             msg_to_send = {
