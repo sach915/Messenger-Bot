@@ -75,7 +75,7 @@ def handle_msg():
 
             print(r.status_code)
             print(r.text)
-
+            print("Finished")
     return "Done!"
 
 
