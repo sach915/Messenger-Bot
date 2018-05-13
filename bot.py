@@ -56,7 +56,7 @@ def handle_msg():
 
 
             msg_to_send = {
-                "messaging_type": "Text",
+                "messaging_type": "RESPONSE",
                 "recipient":{
                   "id": recipient_id
                 },
