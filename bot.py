@@ -31,7 +31,7 @@ def handle_msg():
             # Message data will always have only one message according to the docs
             message_data = datum["messaging"][0]
 
-            if message_data["message"]["text"]:
+            if "text" in message_data["message"]:
                 message = message_data["message"]["text"]
 
                 print("MESSAGE IS ", message)
