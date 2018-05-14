@@ -34,7 +34,7 @@ def handle_msg():
             if message_data["message"]["text"]:
                 message = message_data["message"]["text"]
 
-                # print("MESSAGE IS ", message)
+                print("MESSAGE IS ", message)
                 # print("RECIPIENT ", message_data["recipient"]["id"])
                 # print("SENDER ", message_data["sender"]["id"])
                 # print("TOKEN ",os.environ["PAGE_ACCESS_TOKEN"])
