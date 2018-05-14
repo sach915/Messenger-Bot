@@ -29,53 +29,54 @@ def handle_msg():
     if request["object"] == "page":
         for datum in request["entry"]:
             # Message data will always have only one message according to the docs
-            message_data = datum["messaging"][0]
+            if message_data["message"]["text"]:
+                message_data = datum["messaging"][0]
 
-            message = message_data["message"]["text"]
+                message = message_data["message"]["text"]
 
-            # print("MESSAGE IS ", message)
-            # print("RECIPIENT ", message_data["recipient"]["id"])
-            # print("SENDER ", message_data["sender"]["id"])
-            # print("TOKEN ",os.environ["PAGE_ACCESS_TOKEN"])
-
-
-            # Sending a message back !
-            # After looking online I could've also used the param in reqest.post but oh well
-            token = os.environ["PAGE_ACCESS_TOKEN"]
-            url = "https://graph.facebook.com/v2.6/me/messages?access_token=" + token
-
-            # Recipient would be the sender
-            recipient_id = message_data["sender"]["id"]
-
-            #print(recipient_id)
+                # print("MESSAGE IS ", message)
+                # print("RECIPIENT ", message_data["recipient"]["id"])
+                # print("SENDER ", message_data["sender"]["id"])
+                # print("TOKEN ",os.environ["PAGE_ACCESS_TOKEN"])
 
 
-            headers = {
-            "Content-Type": "application/json"
-            }
+                # Sending a message back !
+                # After looking online I could've also used the param in reqest.post but oh well
+                token = os.environ["PAGE_ACCESS_TOKEN"]
+                url = "https://graph.facebook.com/v2.6/me/messages?access_token=" + token
+
+                # Recipient would be the sender
+                recipient_id = message_data["sender"]["id"]
+
+                #print(recipient_id)
 
 
-            msg_to_send = {
-                "messaging_type": "RESPONSE",
-                "recipient":{
-                  "id": recipient_id
-                },
-                "message":{
-                  "text":"hello, world!"
+                headers = {
+                "Content-Type": "application/json"
                 }
-            }
 
-            msg = json.dumps(msg_to_send)
-            #print(msg)
-            print(url)
-            print("about to post")
-            #print("WHAT IS HAPPENING?")
-            r = requests.post(url, headers=headers, data=msg)
-            #print("POSTED THE MESSAGE?")
 
-            print(r.status_code)
-            print(r.text)
-            print("Finished")
+                msg_to_send = {
+                    "messaging_type": "RESPONSE",
+                    "recipient":{
+                      "id": recipient_id
+                    },
+                    "message":{
+                      "text":"hello, world!"
+                    }
+                }
+
+                msg = json.dumps(msg_to_send)
+                #print(msg)
+                print(url)
+                print("about to post")
+                #print("WHAT IS HAPPENING?")
+                r = requests.post(url, headers=headers, data=msg)
+                #print("POSTED THE MESSAGE?")
+
+                print(r.status_code)
+                print(r.text)
+                print("Finished")
     return "Done!"
 
 
