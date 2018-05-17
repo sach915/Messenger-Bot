@@ -68,12 +68,17 @@ def handle_msg():
                     }
                 }
 
+                # Get today's date
                 current = str(datetime.datetime.now())
                 print("CURRENT ",current)
+                # print("Type ",type(current))
                 current = current.split(" ")
                 print(current)
-                # Trying to get mlb.com data
+                current = current[0]
 
+                # Trying to get mlb.com data
+                r = requests.get("https://www.mlb.com/yankees/scores/2018-05-11")
+                print(r.text)
 
                 msg = json.dumps(msg_to_send)
                 #print(msg)
