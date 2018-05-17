@@ -68,7 +68,7 @@ def handle_msg():
                     }
                 }
 
-                current = datetime.datetime.now()
+                current = str(datetime.datetime.now())
                 print("CURRENT ",current)
                 current = current.split(" ")
                 print(current)
