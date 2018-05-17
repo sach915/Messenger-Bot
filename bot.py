@@ -70,6 +70,9 @@ def handle_msg():
 
                 current = datetime.datetime.now()
                 print("CURRENT ",current)
+                current = current.split(" ")
+                # Trying to get mlb.com data
+
 
                 msg = json.dumps(msg_to_send)
                 #print(msg)
