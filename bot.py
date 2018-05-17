@@ -71,6 +71,7 @@ def handle_msg():
                 current = datetime.datetime.now()
                 print("CURRENT ",current)
                 current = current.split(" ")
+                print(current)
                 # Trying to get mlb.com data
 
 
