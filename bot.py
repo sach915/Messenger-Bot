@@ -2,6 +2,8 @@ import flask
 import requests
 import os
 import json
+from bs4 import BeautifulSoup
+import datetime
 
 app = flask.Flask(__name__)
 
@@ -65,6 +67,9 @@ def handle_msg():
                       "text":"hello, world!"
                     }
                 }
+
+                current = datetime.datetime.now()
+                print("CURRENT ",current)
 
                 msg = json.dumps(msg_to_send)
                 #print(msg)
