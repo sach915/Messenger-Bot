@@ -78,7 +78,7 @@ def handle_msg():
 
                 # Trying to get mlb.com data
                 r = requests.get("https://www.mlb.com/yankees/scores/2018-05-11")
-                print(r.text)
+                print(r.content)
 
                 msg = json.dumps(msg_to_send)
                 #print(msg)
