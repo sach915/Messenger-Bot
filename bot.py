@@ -59,9 +59,9 @@ def get_score(date):
 
     print("FOUND CHROME!!!!!")
     options.add_argument("--headless")
-    chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_argument('--no-sandbox')
-    
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+
     # For local
     # driver = webdriver.Chrome(options=options)
 
@@ -71,6 +71,7 @@ def get_score(date):
 
     url = "https://www.mlb.com/yankees/scores/" + date
     driver.get(url)
+    print("THE DRIVER DID SOMETHING!!!!!")
     #print(driver)
 
     # Get the html node with the score
