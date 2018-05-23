@@ -55,7 +55,7 @@ def get_score(date):
     options = Options()
 
     # This line is also for heroku
-    options.binary_location = os.environ["GOOGLE_CHROME_PATH"]
+    options.binary_location = os.environ["GOOGLE_CHROME_SHIM"]
     print(os.environ["GOOGLE_CHROME_SHIM"])
     print("FOUND CHROME!!!!!")
     options.add_argument("--headless")
