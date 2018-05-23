@@ -2,7 +2,7 @@ import flask
 import requests
 import os
 import json
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 from selenium import webdriver
 
 # These two imports were taken from p3 EECS485
@@ -50,9 +50,21 @@ def get_score(date):
     """
 
     # Setting up headless browser to load the page
+    # https://stackoverflow.com/questions/41059144/running-chromedriver-with-python-selenium-on-heroku
+
     options = Options()
+
+    # This line is also for heroku
+    options.binary_location = os.environ["GOOGLE_CHROME_PATH"]
+
     options.add_argument("--headless")
-    driver = webdriver.Chrome(options=options)
+    # For local
+    # driver = webdriver.Chrome(options=options)
+
+    # For heroku
+    driver = webdriver.Chrome(executable = os.environ["CHROMEDRIVER_PATH"])
+
+
     url = "https://www.mlb.com/yankees/scores/" + date
     driver.get(url)
     #print(driver)
