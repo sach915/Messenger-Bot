@@ -84,6 +84,7 @@ def get_score(date):
     gameinfo = divs.text.split("\n")
     print(gameinfo)
     print("DONE")
+    return gameinfo
 
 @app.route("/", methods=["POST"])
 def handle_msg():
