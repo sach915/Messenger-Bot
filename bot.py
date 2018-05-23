@@ -3,6 +3,12 @@ import requests
 import os
 import json
 from bs4 import BeautifulSoup
+from selenium import webdriver
+
+# These two imports were taken from p3 EECS485
+# Note to self: need to look at docs
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import datetime
 
 app = flask.Flask(__name__)
@@ -14,18 +20,56 @@ def verification():
 
     # when the endpoint is registered as a webhook, it must echo back
     # the 'hub.challenge' value it receives in the query arguments
+    """
     if flask.request.args.get("hub.mode") == "subscribe" and flask.request.args.get("hub.challenge"):
         if not flask.request.args.get("hub.verify_token") == os.environ["VERIFY_TOKEN"]:
             return "Verification token mismatch", 403
         return flask.request.args["hub.challenge"], 200
+    """
 
+
+    # Get today's date
+    current = str(datetime.datetime.now())
+    print("CURRENT ",current)
+    # print("Type ",type(current))
+    current = current.split(" ")
+    print(current)
+    date = current[0]
+
+    gameinfo = get_score(date)
 
     return "Hello World"
+
+def get_score(date):
+    """
+    This wont work because the data is dynamially loaded with js
+    # Trying to get mlb.com data
+    r = requests.get("https://www.mlb.com/yankees/scores/2018-05-11")
+    #print(r.content)
+    soup = BeautifulSoup(r.content,"html.parser")
+    """
+
+    # Setting up headless browser to load the page
+    options = Options()
+    options.add_argument("--headless")
+    driver = webdriver.Chrome(options=options)
+    url = "https://www.mlb.com/yankees/scores/" + date
+    driver.get(url)
+    #print(driver)
+
+    # Get the html node with the score
+    classname = "g5-component--mlb-scores__panel g5-component--mlb-scores__panel--primary"
+    xpath = ("//div[@class= '%s']" % classname)
+    print(xpath)
+    divs = driver.find_element_by_xpath(xpath)
+    gameinfo = divs.text.split("\n")
+    print(gameinfo)
+    print("DONE")
 
 @app.route("/", methods=["POST"])
 def handle_msg():
     print("Handle POST")
-    print(flask.request.get_json())
+    # print(flask.request.get_json())
     request = flask.request.get_json()
 
     if request["object"] == "page":
@@ -50,12 +94,23 @@ def handle_msg():
                 # Recipient would be the sender
                 recipient_id = message_data["sender"]["id"]
 
-                #print(recipient_id)
-
-
                 headers = {
                 "Content-Type": "application/json"
                 }
+
+                text = "hello, world!"
+
+                if message.lower() == "yankees" or message.lower() == "nyy":
+                    # Get today's date
+                    current = str(datetime.datetime.now())
+                    print("CURRENT ",current)
+                    # print("Type ",type(current))
+                    current = current.split(" ")
+                    print(current)
+                    date = current[0]
+
+                    gameinfo = get_score(date)
+                    text = " ".join(gameinfo)
 
 
                 msg_to_send = {
@@ -64,21 +119,9 @@ def handle_msg():
                       "id": recipient_id
                     },
                     "message":{
-                      "text":"hello, world!"
+                      "text":text
                     }
                 }
-
-                # Get today's date
-                current = str(datetime.datetime.now())
-                print("CURRENT ",current)
-                # print("Type ",type(current))
-                current = current.split(" ")
-                print(current)
-                current = current[0]
-
-                # Trying to get mlb.com data
-                r = requests.get("https://www.mlb.com/yankees/scores/2018-05-11")
-                print(r.content)
 
                 msg = json.dumps(msg_to_send)
                 #print(msg)
