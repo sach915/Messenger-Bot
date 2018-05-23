@@ -62,7 +62,7 @@ def get_score(date):
     # driver = webdriver.Chrome(options=options)
 
     # For heroku
-    driver = webdriver.Chrome(executable = os.environ["CHROMEDRIVER_PATH"])
+    driver = webdriver.Chrome(executable_path=os.environ["CHROMEDRIVER_PATH"])
 
 
     url = "https://www.mlb.com/yankees/scores/" + date
