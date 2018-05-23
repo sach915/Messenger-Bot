@@ -56,7 +56,7 @@ def get_score(date):
 
     # This line is also for heroku
     options.binary_location = os.environ["GOOGLE_CHROME_PATH"]
-
+    print(os.environ["GOOGLE_CHROME_SHIM"])
     print("FOUND CHROME!!!!!")
     options.add_argument("--headless")
     options.add_argument('--disable-gpu')
