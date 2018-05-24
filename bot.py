@@ -10,6 +10,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import datetime
+import pytz
 
 app = flask.Flask(__name__)
 
@@ -128,7 +129,15 @@ def handle_msg():
 
                 if message.lower() == "yankees" or message.lower() == "nyy":
                     # Get today's date
-                    current = str(datetime.datetime.now())
+                    # https://stackoverflow.com/questions/10999021/how-to-convert-gmt-time-to-est-time-using-python
+                    gmt = pytz.timezone('GMT')
+                    eastern = pytz.timezone('US/Eastern')
+                    current = datetime.datetime.now()
+                    dategmt = gmt.localize(current)
+                    dateeastern = dategmt.astimezone(eastern)
+
+                    current = str(dateeastern)
+
                     print("CURRENT ",current)
                     # print("Type ",type(current))
                     current = current.split(" ")
