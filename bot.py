@@ -81,7 +81,7 @@ def get_score(date):
     classname = "g5-component--mlb-scores__panel g5-component--mlb-scores__panel--primary"
     xpath = ("//div[@class= '%s']" % classname)
     print(xpath)
-    data = driver.find_elements_by_xpath(xpath)
+    data = driver.find_element_by_xpath(xpath)
     #print(divs.text)
     #gameinfo = divs.text.split("\n")
     gameinfo = []
