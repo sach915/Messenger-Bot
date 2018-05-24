@@ -84,8 +84,8 @@ def get_score(date):
     #print(divs.text)
     #gameinfo = divs.text.split("\n")
     gameinfo = []
-    for game_score in data:
-        game_score = game_score.split("\n")
+    for web_element in data:
+        game_score = web_element.text.split("\n")
         gameinfo.append(game_score)
 
     print(gameinfo)
