@@ -81,7 +81,7 @@ def get_score(date):
     xpath = ("//div[@class= '%s']" % classname)
     print(xpath)
     data = driver.find_elements_by_xpath(xpath)
-    print(divs.text)
+    #print(divs.text)
     #gameinfo = divs.text.split("\n")
     gameinfo = []
     for game_score in data:
