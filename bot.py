@@ -13,6 +13,27 @@ import datetime
 
 app = flask.Flask(__name__)
 
+# Setting up headless browser to load the page
+# https://stackoverflow.com/questions/41059144/running-chromedriver-with-python-selenium-on-heroku
+
+options = Options()
+
+# This line is also for heroku
+options.binary_location = os.environ["GOOGLE_CHROME_SHIM"]
+print(os.environ["GOOGLE_CHROME_BIN"])
+print(os.environ["GOOGLE_CHROME_SHIM"])
+#print(os.environ["chromedriver"])
+print("FOUND CHROME!!!!!")
+options.add_argument("--headless")
+options.add_argument('--disable-gpu')
+options.add_argument('--no-sandbox')
+
+# For local
+# driver = webdriver.Chrome(options=options)
+
+# For heroku
+driver = webdriver.Chrome(executable_path=os.environ["CHROMEDRIVER_PATH"], options=options)
+
 @app.route("/", methods=["GET"])
 def verification():
     print("Im in here")
@@ -48,27 +69,6 @@ def get_score(date):
     #print(r.content)
     soup = BeautifulSoup(r.content,"html.parser")
     """
-
-    # Setting up headless browser to load the page
-    # https://stackoverflow.com/questions/41059144/running-chromedriver-with-python-selenium-on-heroku
-
-    options = Options()
-
-    # This line is also for heroku
-    options.binary_location = os.environ["GOOGLE_CHROME_SHIM"]
-    print(os.environ["GOOGLE_CHROME_BIN"])
-    print(os.environ["GOOGLE_CHROME_SHIM"])
-    #print(os.environ["chromedriver"])
-    print("FOUND CHROME!!!!!")
-    options.add_argument("--headless")
-    options.add_argument('--disable-gpu')
-    options.add_argument('--no-sandbox')
-
-    # For local
-    # driver = webdriver.Chrome(options=options)
-
-    # For heroku
-    driver = webdriver.Chrome(executable_path=os.environ["CHROMEDRIVER_PATH"], options=options)
 
 
     url = "https://www.mlb.com/yankees/scores/" + date
